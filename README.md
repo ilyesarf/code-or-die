@@ -19,6 +19,14 @@ $ cd code-or-die/
 
 $ go build .
 
-$ sudo ./cod 
-// More to come
+$ sudo ./cod
+```
+
+```
+Usage of ./cod:
+  -dir string
+        set direcotry (default <current dir>)
+  -interval int
+        set interval time in minutes > 1 minute (default 30)
+
 ```
