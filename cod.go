@@ -10,7 +10,6 @@ import (
 	"os"
 	"os/user"
 	"path/filepath"
-	"strings"
 	"time"
 )
 
@@ -112,6 +111,7 @@ func cod(interval int, prevhash, dir_path, zip_path string) string {
 	hash := md5sum(zip_path)
 	if hash == prevhash {
 		os.RemoveAll(dir_path)
+		log.Fatal("Your project is deleted, you should've been more productive")
 	} else {
 		return hash
 	}
@@ -122,14 +122,14 @@ func cod(interval int, prevhash, dir_path, zip_path string) string {
 func main() {
 	if checkRoot() {
 		interval, dir_path := getflags()
-		hash := ""
+		zip_path := fmt.Sprintf("/tmp/%s.zip", filepath.Base(dir_path))
+		log.Print(zip_path)
+		hash := cod(interval, "", dir_path, zip_path)
 
 		for {
 			time.Sleep(time.Duration(interval) * time.Second)
-			zip_path := fmt.Sprintf("/tmp/%s.zip", strings.Trim(dir_path, "/"))
 
 			hash = cod(interval, hash, dir_path, zip_path)
-
 		}
 	} else {
 		log.Fatal("SHOULD BE RUNNED AS ROOT (sudo ./cod)")

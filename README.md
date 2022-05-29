@@ -19,5 +19,6 @@ $ cd code-or-die/
 
 $ go build .
 
+$ sudo ./cod 
 // More to come
 ```
