@@ -1,6 +1,6 @@
 <b> The idea is simple: </b>
 
-You procrasinate, your code gets deleted.
+You don't code for a certain amount of time, your code gets deleted.
 
 Inspired by <a href="https://writeordie.com/">write-or-die </a>
 
