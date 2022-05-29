@@ -9,6 +9,7 @@ Inspired by <a href="https://writeordie.com/">write-or-die </a>
 - [ ] Modes
 - [ ] Git support
 - [ ] Reminder?
+- [ ] Windows Support
 
 ## Usage
 
