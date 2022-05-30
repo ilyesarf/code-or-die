@@ -11,7 +11,7 @@ Inspired by <a href="https://writeordie.com/">write-or-die </a>
 - [ ] Reminder?
 - [ ] Windows Support
 
-## Usage
+## Installation
 
 ```
 $ git clone https://github.com/Quimzy/code-or-die
@@ -23,6 +23,8 @@ $ go build .
 $ sudo ./cod
 ```
 
+## Usage
+
 ```
 Usage of ./cod:
   -dir string
@@ -31,3 +33,4 @@ Usage of ./cod:
         set interval time in minutes > 1 minute (default 30)
 
 ```
+
