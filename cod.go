@@ -123,7 +123,7 @@ func main() {
 	if checkRoot() {
 		interval, dir_path := getflags()
 		zip_path := fmt.Sprintf("/tmp/%s.zip", filepath.Base(dir_path))
-		log.Print(zip_path)
+		//log.Print(zip_path)
 		hash := cod(interval, "", dir_path, zip_path)
 
 		for {
