@@ -10,6 +10,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"runtime"
 	"time"
 
 	"github.com/faiface/beep"
@@ -33,6 +34,19 @@ func getflags() (int, string, bool) {
 	flag.Parse()
 
 	return *interval * 60, *dir_path, *git_mode
+}
+
+func detect_os(dir_path string) string {
+	var zip_path string
+
+	os := runtime.GOOS
+	if os == "windows" {
+		zip_path = fmt.Sprintf("C:\\tmp\\%s.zip", filepath.Base(dir_path))
+	} else {
+		zip_path = fmt.Sprintf("/tmp/%s.zip", filepath.Base(dir_path))
+	}
+
+	return zip_path
 }
 
 func zipper(dir_path, zip_path string) error { //yes, i copied and pasted this.. zipping in Go is too complicated
@@ -158,8 +172,9 @@ func reminder(interval int) {
 
 func main() {
 	interval, dir_path, git_mode := getflags()
-	zip_path := fmt.Sprintf("/tmp/%s.zip", filepath.Base(dir_path))
-	//log.Print(zip_path)
+
+	zip_path := detect_os(dir_path)
+
 	hash := cod(interval, "", dir_path, zip_path, git_mode)
 
 	for {

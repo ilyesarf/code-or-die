@@ -2,7 +2,7 @@
 
 You don't code for a certain amount of time, your code gets deleted.
 
-Inspired by <a href="https://writeordie.com/">write-or-die </a>
+Inspired by <a href="https://writeordie.com/">write-or-die</a>
 
 <b> USE THIS AT YOUR OWN EXPENSE. </b> 
 
@@ -42,4 +42,6 @@ Usage of ./cod:
 - [ ] Modes
 - [X] Git support
 - [X] Reminder
-- [ ] Windows Support
+- [X] Windows Support
+
+**I love beautiful pull requests and contributions. You got any ideas for new features? Implement it and pull request or add it as a feature <a href="https://github.com/Quimzy/code-or-die#features">here</a>**
