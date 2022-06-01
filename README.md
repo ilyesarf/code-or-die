@@ -1,8 +1,10 @@
-<b> The idea is simple: </b>
+## The idea is simple
 
 You don't code for a certain amount of time, your code gets deleted.
 
 Inspired by <a href="https://writeordie.com/">write-or-die </a>
+
+<b> USE THIS AT YOUR OWN EXPENSE. </b> 
 
 ## Requirements
 
@@ -31,11 +33,13 @@ Usage of ./cod:
         set direcotry (default <current dir>)
   -t int
         set interval time in minutes > 1 minute (default 30)
+  -git (optional)
+        set git mode
 
 ```
 ## Features
 
 - [ ] Modes
-- [ ] Git support
+- [X] Git support
 - [X] Reminder
 - [ ] Windows Support

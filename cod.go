@@ -8,6 +8,7 @@ import (
 	"io"
 	"log"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"time"
 
@@ -17,7 +18,7 @@ import (
 	"tawesoft.co.uk/go/dialog"
 )
 
-func getflags() (int, string) {
+func getflags() (int, string, bool) {
 	var interval = flag.Int("t", 30, "set interval time in minutes > 1 minute")
 
 	pwd, err := os.Getwd()
@@ -27,9 +28,11 @@ func getflags() (int, string) {
 
 	var dir_path = flag.String("d", pwd, "set direcotry")
 
+	var git_mode = flag.Bool("git", false, "set git mode")
+
 	flag.Parse()
 
-	return *interval * 60, *dir_path
+	return *interval * 60, *dir_path, *git_mode
 }
 
 func zipper(dir_path, zip_path string) error { //yes, i copied and pasted this.. zipping in Go is too complicated
@@ -101,12 +104,20 @@ func md5sum(path string) string {
 	return string(hash.Sum(nil))
 }
 
-func cod(interval int, prevhash, dir_path, zip_path string) string {
+func cod(interval int, prevhash, dir_path, zip_path string, git_mode bool) string {
 	zipper(dir_path, zip_path)
 	hash := md5sum(zip_path)
+
 	if hash == prevhash {
+		if git_mode {
+			//delete repo content
+			exec.Command("git", "rm .")
+			exec.Command("git", "push")
+		}
+		// delete the whole repo
 		os.RemoveAll(dir_path)
-		log.Fatal("Your project is deleted, you should've been more productive")
+		sound()
+		dialog.Alert("Your project is deleted, you should've been more productive")
 	} else {
 		return hash
 	}
@@ -146,17 +157,17 @@ func reminder(interval int) {
 }
 
 func main() {
-	interval, dir_path := getflags()
+	interval, dir_path, git_mode := getflags()
 	zip_path := fmt.Sprintf("/tmp/%s.zip", filepath.Base(dir_path))
 	//log.Print(zip_path)
-	hash := cod(interval, "", dir_path, zip_path)
+	hash := cod(interval, "", dir_path, zip_path, git_mode)
 
 	for {
 		time.Sleep(time.Duration(float32(interval*3/4)) * time.Second)
 		reminder(interval)
 		time.Sleep(time.Duration(float32(interval/4)) * time.Second)
 
-		hash = cod(interval, hash, dir_path, zip_path)
+		hash = cod(interval, hash, dir_path, zip_path, git_mode)
 
 	}
 }
