@@ -8,7 +8,6 @@ import (
 	"io"
 	"log"
 	"os"
-<<<<<<< HEAD
 	"path/filepath"
 	"time"
 
@@ -20,35 +19,13 @@ import (
 
 func getflags() (int, string) {
 	var interval = flag.Int("t", 30, "set interval time in minutes > 1 minute")
-=======
-	"os/user"
-	"path/filepath"
-	"time"
-)
-
-func checkRoot() bool {
-	currentUser, err := user.Current()
-	if err != nil {
-		log.Fatalf("[isRoot] Unable to get current user: %s", err)
-	}
-
-	return currentUser.Username == "root"
-}
-
-func getflags() (int, string) {
-	var interval = flag.Int("interval", 30, "set interval time in minutes > 1 minute")
->>>>>>> 81e56983fce77b33b2df706fcfaeeb010f92cf10
 
 	pwd, err := os.Getwd()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-<<<<<<< HEAD
 	var dir_path = flag.String("d", pwd, "set direcotry")
-=======
-	var dir_path = flag.String("dir", pwd, "set direcotry")
->>>>>>> 81e56983fce77b33b2df706fcfaeeb010f92cf10
 
 	flag.Parse()
 
@@ -137,7 +114,6 @@ func cod(interval int, prevhash, dir_path, zip_path string) string {
 	return ""
 }
 
-<<<<<<< HEAD
 func sound() {
 	f, err := os.Open("beep.mp3")
 	if err != nil {
@@ -181,22 +157,6 @@ func main() {
 		time.Sleep(time.Duration(float32(interval/4)) * time.Second)
 
 		hash = cod(interval, hash, dir_path, zip_path)
-=======
-func main() {
-	if checkRoot() {
-		interval, dir_path := getflags()
-		zip_path := fmt.Sprintf("/tmp/%s.zip", filepath.Base(dir_path))
-		//log.Print(zip_path)
-		hash := cod(interval, "", dir_path, zip_path)
 
-		for {
-			time.Sleep(time.Duration(interval) * time.Second)
-
-			hash = cod(interval, hash, dir_path, zip_path)
-		}
-	} else {
-		log.Fatal("SHOULD BE RUNNED AS ROOT (sudo ./cod)")
->>>>>>> 81e56983fce77b33b2df706fcfaeeb010f92cf10
 	}
-
 }
