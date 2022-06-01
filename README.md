@@ -19,7 +19,6 @@ $ cd code-or-die/
 
 $ go build .
 
-<<<<<<< HEAD
 $ ./cod
 
 ```
